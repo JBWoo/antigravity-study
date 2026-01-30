@@ -233,8 +233,13 @@
             </div>
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-2 glass px-4 py-2 border-white/5">
-                    <i data-lucide="calendar" class="w-4 h-4 text-cyanNeon"></i>
-                    <span class="text-xs font-bold text-slate-300">Jan 20, 2026 - Jan 30, 2026</span>
+                    <i data-lucide="filter" class="w-4 h-4 text-cyanNeon"></i>
+                    <select id="dataFilter"
+                        class="bg-transparent text-xs font-bold text-slate-300 focus:outline-none cursor-pointer">
+                        <option value="all" class="bg-midnight font-sans">All Segments</option>
+                        <option value="electronics" class="bg-midnight font-sans">Electronics</option>
+                        <option value="fashion" class="bg-midnight font-sans">Fashion & Lifestyle</option>
+                    </select>
                 </div>
                 <button
                     class="bg-white text-midnight font-bold px-6 py-2.5 rounded-xl hover:bg-cyanNeon transition-all flex items-center gap-2 text-sm">
@@ -357,7 +362,6 @@
                         <span class="w-2 h-2 rounded-full bg-cyanNeon"></span>
                         <span class="text-[10px] font-bold text-slate-400">SYNCED</span>
                     </div>
-                    <i data-lucide="more-horizontal" class="w-5 h-5 text-slate-500 cursor-pointer"></i>
                 </div>
             </div>
             <table class="w-full">
@@ -370,79 +374,116 @@
                         <th class="text-right pb-4">Action</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-white/[0.03]">
-                    <tr class="group hover:bg-white/[0.02] transition-colors cursor-pointer">
-                        <td class="py-5">
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-10 h-10 rounded-lg glass bg-white/5 flex items-center justify-center font-bold text-xs text-white">
-                                    #LT</div>
-                                <div>
-                                    <p class="text-sm font-bold text-white group-hover:text-cyanNeon transition-colors">
-                                        Neural Laptop Pro</p>
-                                    <p class="text-[10px] text-slate-600">ID: LX-9240-Z</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="py-5">
-                            <span class="px-2 py-1 glass bg-white/5 text-[9px] font-bold rounded-md">COMPUTING</span>
-                        </td>
-                        <td class="py-5">
-                            <p class="text-sm font-bold">$12.4M</p>
-                            <p class="text-[10px] text-green-500">+4.2% Growth</p>
-                        </td>
-                        <td class="py-5">
-                            <div class="w-24 h-1.5 glass bg-white/5 rounded-full overflow-hidden">
-                                <div class="w-[85%] h-full bg-gradient-to-r from-cyanNeon to-purpleNeon"></div>
-                            </div>
-                        </td>
-                        <td class="py-5 text-right">
-                            <button class="p-2 hover:text-cyanNeon transition-colors">
-                                <i data-lucide="external-link" class="w-4 h-4 text-slate-600"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="group hover:bg-white/[0.02] transition-colors cursor-pointer">
-                        <td class="py-5">
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-10 h-10 rounded-lg glass bg-white/5 flex items-center justify-center font-bold text-xs text-white">
-                                    #AP</div>
-                                <div>
-                                    <p class="text-sm font-bold text-white group-hover:text-cyanNeon transition-colors">
-                                        Sonic Buds Max</p>
-                                    <p class="text-[10px] text-slate-600">ID: LX-1152-X</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="py-5">
-                            <span class="px-2 py-1 glass bg-white/5 text-[9px] font-bold rounded-md">AUDIO</span>
-                        </td>
-                        <td class="py-5">
-                            <p class="text-sm font-bold">$4.8M</p>
-                            <p class="text-[10px] text-purpleNeon">+12.8% Growth</p>
-                        </td>
-                        <td class="py-5">
-                            <div class="w-24 h-1.5 glass bg-white/5 rounded-full overflow-hidden">
-                                <div class="w-[62%] h-full bg-gradient-to-r from-cyanNeon to-purpleNeon"></div>
-                            </div>
-                        </td>
-                        <td class="py-5 text-right">
-                            <button class="p-2 hover:text-cyanNeon transition-colors">
-                                <i data-lucide="external-link" class="w-4 h-4 text-slate-600"></i>
-                            </button>
-                        </td>
-                    </tr>
+                <tbody id="productTableBody" class="divide-y divide-white/[0.03]">
+                    <!-- Table content will be injected by JavaScript -->
                 </tbody>
             </table>
         </div>
     </main>
 
     <script>
-        // Init Lucide Icons
-        lucide.createIcons();
+        // High Fidelity Sample Data (Based on Online Retail / Common E-commerce Patterns)
+        const storeData = {
+            all: {
+                revenue: "$1,240,580",
+                sales: "12,840",
+                conversion: "4.28%",
+                growth: "842.1",
+                velocity: [42, 38, 55, 78, 92, 85, 96, 110],
+                mix: [45, 30, 25],
+                products: [
+                    { id: 'LX-9240-Z', name: 'Neural Laptop Pro', category: 'COMPUTING', cap: '$12.4M', growth: '+4.2%', velocity: 85 },
+                    { id: 'LX-1152-X', name: 'Sonic Buds Max', category: 'AUDIO', cap: '$4.8M', growth: '+12.8%', velocity: 62 },
+                    { id: 'LX-8830-A', name: 'Vision Glass S2', category: 'WEARABLES', cap: '$2.1M', growth: '+2.4%', velocity: 45 },
+                    { id: 'LX-4421-K', name: 'Prime Cloud Hub', category: 'IOT', cap: '$9.2M', growth: '+8.1%', velocity: 78 }
+                ]
+            },
+            electronics: {
+                revenue: "$840,200",
+                sales: "5,420",
+                conversion: "3.15%",
+                growth: "420.5",
+                velocity: [30, 45, 40, 60, 55, 70, 65, 80],
+                mix: [60, 25, 15],
+                products: [
+                    { id: 'LX-9240-Z', name: 'Neural Laptop Pro', category: 'COMPUTING', cap: '$12.4M', growth: '+4.2%', velocity: 85 },
+                    { id: 'LX-1152-X', name: 'Sonic Buds Max', category: 'AUDIO', cap: '$4.8M', growth: '+12.8%', velocity: 62 }
+                ]
+            },
+            fashion: {
+                revenue: "$400,380",
+                sales: "7,420",
+                conversion: "5.42%",
+                growth: "421.6",
+                velocity: [50, 40, 65, 85, 95, 110, 105, 130],
+                mix: [20, 50, 30],
+                products: [
+                    { id: 'LX-8830-A', name: 'Vision Glass S2', category: 'WEARABLES', cap: '$2.1M', growth: '+2.4%', velocity: 45 },
+                    { id: 'LX-4421-K', name: 'Designer Tech Suit', category: 'APPAREL', cap: '$3.5M', growth: '+15.2%', velocity: 92 }
+                ]
+            }
+        };
 
-        // Custom Gradient for Line Chart
+        // UI Update Logic
+        const updateUI = (segment) => {
+            const data = storeData[segment];
+
+            // Update KPIs with simple animation/transition feel
+            document.querySelectorAll('.kpi-card h3').forEach((el, i) => {
+                const keys = ['revenue', 'sales', 'conversion', 'growth'];
+                el.innerText = data[keys[i]];
+            });
+
+            // Update Charts
+            velocityChart.data.datasets[0].data = data.velocity;
+            velocityChart.update();
+
+            productMixChart.data.datasets[0].data = data.mix;
+            productMixChart.update();
+
+            // Update Table
+            const tbody = document.getElementById('productTableBody');
+            tbody.innerHTML = data.products.map(p => `
+                <tr class="group hover:bg-white/[0.02] transition-colors cursor-pointer">
+                    <td class="py-5">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg glass bg-white/5 flex items-center justify-center font-bold text-xs text-white">#${p.id.split('-')[1].substring(0, 2)}</div>
+                            <div>
+                                <p class="text-sm font-bold text-white group-hover:text-cyanNeon transition-colors">${p.name}</p>
+                                <p class="text-[10px] text-slate-600">ID: ${p.id}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-5">
+                        <span class="px-2 py-1 glass bg-white/5 text-[9px] font-bold rounded-md">${p.category}</span>
+                    </td>
+                    <td class="py-5">
+                        <p class="text-sm font-bold">${p.cap}</p>
+                        <p class="text-[10px] ${p.growth.startsWith('+') ? 'text-green-500' : 'text-red-500'}">${p.growth} Growth</p>
+                    </td>
+                    <td class="py-5">
+                        <div class="w-24 h-1.5 glass bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-cyanNeon to-purpleNeon" style="width: ${p.velocity}%"></div>
+                        </div>
+                    </td>
+                    <td class="py-5 text-right">
+                        <button class="p-2 hover:text-cyanNeon transition-colors">
+                            <i data-lucide="external-link" class="w-4 h-4 text-slate-600"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+
+            // Re-init icons for new table content
+            lucide.createIcons();
+        };
+
+        // Filter Event
+        document.getElementById('dataFilter').addEventListener('change', (e) => {
+            updateUI(e.target.value);
+        });
+
+        // Chart Initialization
         const velocityCtx = document.getElementById('velocityChart').getContext('2d');
         const velocityGradient = velocityCtx.createLinearGradient(0, 0, 0, 320);
         velocityGradient.addColorStop(0, 'rgba(0, 242, 255, 0.15)');
@@ -451,10 +492,10 @@
         const velocityChart = new Chart(velocityCtx, {
             type: 'line',
             data: {
-                labels: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+                labels: ['10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm'],
                 datasets: [{
                     label: 'Velocity Index',
-                    data: [42, 38, 55, 78, 92, 85, 96, 110],
+                    data: storeData.all.velocity,
                     borderColor: '#00F2FF',
                     borderWidth: 4,
                     pointRadius: 0,
@@ -491,7 +532,7 @@
                     },
                     y: {
                         grid: { color: 'rgba(255, 255, 255, 0.03)', drawBorder: false },
-                        ticks: { color: '#4B5563', font: { size: 10, weight: 'bold' }, stepSize: 25 }
+                        ticks: { color: '#4B5563', font: { size: 10, weight: 'bold' } }
                     }
                 },
                 interaction: {
@@ -502,12 +543,12 @@
 
         // Product Mix Doughnut
         const mixCtx = document.getElementById('productMixChart').getContext('2d');
-        const mixChart = new Chart(mixCtx, {
+        const productMixChart = new Chart(mixCtx, {
             type: 'doughnut',
             data: {
                 labels: ['Pro', 'Elite', 'Venture'],
                 datasets: [{
-                    data: [45, 30, 25],
+                    data: storeData.all.mix,
                     backgroundColor: [
                         '#00F2FF',
                         '#BF5AF2',
@@ -530,6 +571,12 @@
                 }
             }
         });
+
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // Initialize UI with 'all' segment
+        updateUI('all');
     </script>
 </body>
 
