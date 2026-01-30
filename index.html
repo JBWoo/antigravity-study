@@ -53,26 +53,19 @@
             border-right: 1px solid var(--glass-border);
         }
 
-        .neon-border-cyan {
-            border-bottom: 2px solid var(--neon-cyan);
+        .kpi-card {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .neon-border-purple {
-            border-bottom: 2px solid var(--neon-purple);
-        }
-
-        .neon-text-cyan {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 12px rgba(0, 242, 255, 0.3);
-        }
-
-        .neon-text-purple {
-            color: var(--neon-purple);
-            text-shadow: 0 0 12px rgba(191, 90, 242, 0.3);
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .sidebar-item {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
         }
 
         .sidebar-item:hover {
@@ -86,38 +79,10 @@
             border-right: 3px solid var(--neon-cyan);
         }
 
-        .kpi-card {
-            transition: all 0.4s ease;
+        .chart-container {
             position: relative;
-            overflow: hidden;
-        }
-
-        .kpi-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .kpi-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+            height: 320px;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-            transition: 0.5s;
-        }
-
-        .kpi-card:hover::before {
-            left: 100%;
-        }
-
-        /* Bento Grid Specifics */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 1.5rem;
         }
 
         ::-webkit-scrollbar {
@@ -131,16 +96,6 @@
         ::-webkit-scrollbar-thumb {
             background: #1F2937;
             border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #374151;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 320px;
-            width: 100%;
         }
     </style>
     <script>
@@ -160,8 +115,6 @@
 </head>
 
 <body class="flex items-start">
-
-    <!-- Premium Navigation -->
     <nav class="w-72 h-screen glass-nav sticky top-0 flex flex-col p-6 z-50">
         <div class="flex items-center gap-4 mb-12 px-2">
             <div
@@ -195,15 +148,6 @@
                 <i data-lucide="bar-chart-big" class="w-5 h-5 group-hover:text-amber-400"></i>
                 <span class="font-semibold text-sm">Revenue</span>
             </a>
-
-            <div class="pt-8 pb-4">
-                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-4">Preference</p>
-            </div>
-            <a href="#"
-                class="sidebar-item group flex items-center gap-4 px-4 py-4 rounded-xl cursor-pointer text-slate-400 hover:text-white">
-                <i data-lucide="settings-2" class="w-5 h-5 group-hover:text-white"></i>
-                <span class="font-semibold text-sm">Settings</span>
-            </a>
         </div>
 
         <div class="mt-auto glass border border-white/5 p-4 flex items-center gap-4">
@@ -215,13 +159,10 @@
                 <p class="text-xs font-bold truncate">Premium User</p>
                 <p class="text-[10px] text-slate-500 truncate">Pro Analytics Plan</p>
             </div>
-            <i data-lucide="chevron-up" class="w-4 h-4 text-slate-600"></i>
         </div>
     </nav>
 
-    <!-- Content Area -->
     <main class="flex-1 p-10 min-h-screen">
-        <!-- Dashboard Header -->
         <header class="flex justify-between items-end mb-12">
             <div>
                 <nav class="flex items-center gap-2 text-xs text-slate-500 mb-2">
@@ -237,253 +178,125 @@
                     <select id="dataFilter"
                         class="bg-transparent text-xs font-bold text-slate-300 focus:outline-none cursor-pointer">
                         <option value="all" class="bg-midnight font-sans">All Segments</option>
-                        <option value="electronics" class="bg-midnight font-sans">Electronics</option>
-                        <option value="fashion" class="bg-midnight font-sans">Fashion & Lifestyle</option>
+                        <option value="computing" class="bg-midnight font-sans">Computing</option>
+                        <option value="audio" class="bg-midnight font-sans">Audio</option>
+                        <option value="wearables" class="bg-midnight font-sans">Wearables</option>
                     </select>
                 </div>
-                <button
-                    class="bg-white text-midnight font-bold px-6 py-2.5 rounded-xl hover:bg-cyanNeon transition-all flex items-center gap-2 text-sm">
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                    Export
-                </button>
             </div>
         </header>
 
-        <!-- KPI Grid -->
         <div class="grid grid-cols-4 gap-6 mb-10">
             <div class="kpi-card glass p-6 border-t-2 border-cyanNeon/20">
                 <div class="flex justify-between items-center mb-6">
                     <div class="w-10 h-10 rounded-xl glass flex items-center justify-center text-cyanNeon">
                         <i data-lucide="wallet" class="w-5 h-5"></i>
                     </div>
-                    <span
-                        class="text-[10px] font-black text-green-400 bg-green-400/10 px-2 py-1 rounded-md uppercase tracking-tighter">+14.2%</span>
                 </div>
                 <span class="text-xs font-medium text-slate-400 uppercase tracking-widest">Gross Revenue</span>
-                <h3 class="text-3xl font-bold mt-1">$1,240,580</h3>
+                <h3 class="text-3xl font-bold mt-1">$0</h3>
             </div>
-
             <div class="kpi-card glass p-6 border-t-2 border-purpleNeon/20">
                 <div class="flex justify-between items-center mb-6">
                     <div class="w-10 h-10 rounded-xl glass flex items-center justify-center text-purpleNeon">
                         <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                     </div>
-                    <span
-                        class="text-[10px] font-black text-green-400 bg-green-400/10 px-2 py-1 rounded-md uppercase tracking-tighter">+5.8%</span>
                 </div>
                 <span class="text-xs font-medium text-slate-400 uppercase tracking-widest">Active Sales</span>
-                <h3 class="text-3xl font-bold mt-1">12,840</h3>
+                <h3 class="text-3xl font-bold mt-1">0</h3>
             </div>
-
             <div class="kpi-card glass p-6 border-t-2 border-accent/20">
                 <div class="flex justify-between items-center mb-6">
                     <div class="w-10 h-10 rounded-xl glass flex items-center justify-center text-accent">
                         <i data-lucide="zap" class="w-5 h-5"></i>
                     </div>
-                    <span
-                        class="text-[10px] font-black text-red-400 bg-red-400/10 px-2 py-1 rounded-md uppercase tracking-tighter">-2.1%</span>
                 </div>
                 <span class="text-xs font-medium text-slate-400 uppercase tracking-widest">Conversion Rate</span>
-                <h3 class="text-3xl font-bold mt-1">4.28%</h3>
+                <h3 class="text-3xl font-bold mt-1">0%</h3>
             </div>
-
             <div class="kpi-card glass p-6 border-t-2 border-white/20">
                 <div class="flex justify-between items-center mb-6">
                     <div class="w-10 h-10 rounded-xl glass flex items-center justify-center text-white">
                         <i data-lucide="activity" class="w-5 h-5"></i>
                     </div>
-                    <span
-                        class="text-[10px] font-black text-green-400 bg-green-400/10 px-2 py-1 rounded-md uppercase tracking-tighter">+28%</span>
                 </div>
                 <span class="text-xs font-medium text-slate-400 uppercase tracking-widest">Growth Index</span>
-                <h3 class="text-3xl font-bold mt-1">842.1</h3>
+                <h3 class="text-3xl font-bold mt-1">0</h3>
             </div>
         </div>
 
-        <!-- Main Analytics Section -->
         <div class="grid grid-cols-12 gap-8 mb-8">
-            <!-- Large Chart -->
             <div class="col-span-8 glass p-8">
-                <div class="flex justify-between items-center mb-10">
-                    <div>
-                        <h4 class="text-xl font-bold text-white">Performance Velocity</h4>
-                        <p class="text-xs text-slate-500">Real-time revenue synchronization across all sectors</p>
-                    </div>
-                    <div class="flex gap-2 glass p-1 border-white/5">
-                        <button
-                            class="px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase bg-white/10 text-white">Income</button>
-                        <button
-                            class="px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase text-slate-500 hover:text-white">Traffic</button>
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <canvas id="velocityChart"></canvas>
-                </div>
+                <h4 class="text-xl font-bold text-white mb-10">Performance Velocity</h4>
+                <div class="chart-container"><canvas id="velocityChart"></canvas></div>
             </div>
-
-            <!-- Side Stats -->
             <div class="col-span-4 flex flex-col gap-8">
-                <div class="glass p-8 flex-1 group">
-                    <h4 class="text-lg font-bold mb-6 flex items-center justify-between">
-                        Product Mix
-                        <i data-lucide="info" class="w-4 h-4 text-slate-600"></i>
-                    </h4>
+                <div class="glass p-8 flex-1">
+                    <h4 class="text-lg font-bold mb-6">Product Mix</h4>
                     <div class="relative flex justify-center">
                         <canvas id="productMixChart"></canvas>
                         <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                             <span class="text-2xl font-black text-white">72%</span>
-                            <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest">Optimized</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass p-6 bg-gradient-to-br from-cyanNeon/10 to-transparent border-cyanNeon/20">
-                    <div class="flex items-start gap-4">
-                        <div class="p-3 glass bg-midnight border-white/10 rounded-xl">
-                            <i data-lucide="sparkles" class="w-6 h-6 text-cyanNeon"></i>
-                        </div>
-                        <div>
-                            <h5 class="font-bold text-sm">Peak AI Suggestion</h5>
-                            <p class="text-[11px] text-slate-400 mt-1 leading-relaxed">System predicts a <span
-                                    class="text-cyanNeon font-bold">15% surge</span> in audio segment sales next week.
-                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Data Table Section -->
         <div class="glass p-8 overflow-hidden">
-            <div class="flex justify-between items-center mb-8">
-                <h4 class="text-xl font-bold text-white uppercase tracking-tighter">Market Efficiency Matrix</h4>
-                <div class="flex items-center gap-3">
-                    <div class="glass px-3 py-1.5 border-white/5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-cyanNeon"></span>
-                        <span class="text-[10px] font-bold text-slate-400">SYNCED</span>
-                    </div>
-                </div>
-            </div>
+            <h4 class="text-xl font-bold text-white uppercase tracking-tighter mb-8">Market Efficiency Matrix</h4>
             <table class="w-full">
                 <thead>
-                    <tr class="text-[10px] font-bold text-slate-500 uppercase tracking-widest border-b border-white/5">
-                        <th class="text-left pb-4">Identifier</th>
-                        <th class="text-left pb-4">Category</th>
-                        <th class="text-left pb-4">Market Cap</th>
-                        <th class="text-left pb-4">Velocity</th>
-                        <th class="text-right pb-4">Action</th>
+                    <tr
+                        class="text-[10px] font-bold text-slate-500 uppercase tracking-widest border-b border-white/5 text-left">
+                        <th class="pb-4">Identifier</th>
+                        <th class="pb-4">Category</th>
+                        <th class="pb-4">Market Cap</th>
+                        <th class="pb-4">Velocity</th>
+                        <th class="pb-4 text-right">Action</th>
                     </tr>
                 </thead>
-                <tbody id="productTableBody" class="divide-y divide-white/[0.03]">
-                    <!-- Table content will be injected by JavaScript -->
-                </tbody>
+                <tbody id="productTableBody" class="divide-y divide-white/[0.03]"></tbody>
             </table>
         </div>
     </main>
 
     <script>
-        // High Fidelity Sample Data (Based on Online Retail / Common E-commerce Patterns)
-        const storeData = {
-            all: {
-                revenue: "$1,240,580",
-                sales: "12,840",
-                conversion: "4.28%",
-                growth: "842.1",
-                velocity: [42, 38, 55, 78, 92, 85, 96, 110],
-                mix: [45, 30, 25],
-                products: [
-                    { id: 'LX-9240-Z', name: 'Neural Laptop Pro', category: 'COMPUTING', cap: '$12.4M', growth: '+4.2%', velocity: 85 },
-                    { id: 'LX-1152-X', name: 'Sonic Buds Max', category: 'AUDIO', cap: '$4.8M', growth: '+12.8%', velocity: 62 },
-                    { id: 'LX-8830-A', name: 'Vision Glass S2', category: 'WEARABLES', cap: '$2.1M', growth: '+2.4%', velocity: 45 },
-                    { id: 'LX-4421-K', name: 'Prime Cloud Hub', category: 'IOT', cap: '$9.2M', growth: '+8.1%', velocity: 78 }
-                ]
-            },
-            electronics: {
-                revenue: "$840,200",
-                sales: "5,420",
-                conversion: "3.15%",
-                growth: "420.5",
-                velocity: [30, 45, 40, 60, 55, 70, 65, 80],
-                mix: [60, 25, 15],
-                products: [
-                    { id: 'LX-9240-Z', name: 'Neural Laptop Pro', category: 'COMPUTING', cap: '$12.4M', growth: '+4.2%', velocity: 85 },
-                    { id: 'LX-1152-X', name: 'Sonic Buds Max', category: 'AUDIO', cap: '$4.8M', growth: '+12.8%', velocity: 62 }
-                ]
-            },
-            fashion: {
-                revenue: "$400,380",
-                sales: "7,420",
-                conversion: "5.42%",
-                growth: "421.6",
-                velocity: [50, 40, 65, 85, 95, 110, 105, 130],
-                mix: [20, 50, 30],
-                products: [
-                    { id: 'LX-8830-A', name: 'Vision Glass S2', category: 'WEARABLES', cap: '$2.1M', growth: '+2.4%', velocity: 45 },
-                    { id: 'LX-4421-K', name: 'Designer Tech Suit', category: 'APPAREL', cap: '$3.5M', growth: '+15.2%', velocity: 92 }
-                ]
-            }
-        };
+        let storeData = null;
+        lucide.createIcons();
 
-        // UI Update Logic
-        const updateUI = (segment) => {
-            const data = storeData[segment];
+        const updateUI = (filter = 'all') => {
+            if (!storeData) return;
+            const kpiH3s = document.querySelectorAll('.kpi-card h3');
+            kpiH3s[0].innerText = `$${storeData.kpis.grossRevenue.toLocaleString()}`;
+            kpiH3s[1].innerText = storeData.kpis.activeSales.toLocaleString();
+            kpiH3s[2].innerText = `${storeData.kpis.conversionRate}%`;
+            kpiH3s[3].innerText = storeData.kpis.growthIndex.toLocaleString();
 
-            // Update KPIs with simple animation/transition feel
-            document.querySelectorAll('.kpi-card h3').forEach((el, i) => {
-                const keys = ['revenue', 'sales', 'conversion', 'growth'];
-                el.innerText = data[keys[i]];
-            });
-
-            // Update Charts
-            velocityChart.data.datasets[0].data = data.velocity;
+            velocityChart.data.labels = storeData.velocityChart.labels;
+            velocityChart.data.datasets[0].data = storeData.velocityChart.data;
             velocityChart.update();
 
-            productMixChart.data.datasets[0].data = data.mix;
+            productMixChart.data.labels = storeData.productMixChart.labels;
+            productMixChart.data.datasets[0].data = storeData.productMixChart.data;
             productMixChart.update();
 
-            // Update Table
-            const tbody = document.getElementById('productTableBody');
-            tbody.innerHTML = data.products.map(p => `
-                <tr class="group hover:bg-white/[0.02] transition-colors cursor-pointer">
+            const filtered = filter === 'all' ? storeData.products : storeData.products.filter(p => p.category.toLowerCase() === filter.toLowerCase());
+            document.getElementById('productTableBody').innerHTML = filtered.map(p => `
+                <tr class="group hover:bg-white/[0.02] transition-colors">
                     <td class="py-5">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-lg glass bg-white/5 flex items-center justify-center font-bold text-xs text-white">#${p.id.split('-')[1].substring(0, 2)}</div>
-                            <div>
-                                <p class="text-sm font-bold text-white group-hover:text-cyanNeon transition-colors">${p.name}</p>
-                                <p class="text-[10px] text-slate-600">ID: ${p.id}</p>
-                            </div>
-                        </div>
+                        <p class="text-sm font-bold text-white">${p.name}</p>
+                        <p class="text-[10px] text-slate-600">${p.identifier}</p>
                     </td>
-                    <td class="py-5">
-                        <span class="px-2 py-1 glass bg-white/5 text-[9px] font-bold rounded-md">${p.category}</span>
-                    </td>
-                    <td class="py-5">
-                        <p class="text-sm font-bold">${p.cap}</p>
-                        <p class="text-[10px] ${p.growth.startsWith('+') ? 'text-green-500' : 'text-red-500'}">${p.growth} Growth</p>
-                    </td>
-                    <td class="py-5">
-                        <div class="w-24 h-1.5 glass bg-white/5 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-cyanNeon to-purpleNeon" style="width: ${p.velocity}%"></div>
-                        </div>
-                    </td>
-                    <td class="py-5 text-right">
-                        <button class="p-2 hover:text-cyanNeon transition-colors">
-                            <i data-lucide="external-link" class="w-4 h-4 text-slate-600"></i>
-                        </button>
-                    </td>
+                    <td class="py-5"><span class="px-2 py-1 glass bg-white/5 text-[9px] font-bold rounded-md">${p.category.toUpperCase()}</span></td>
+                    <td class="py-5"><p class="text-sm font-bold">${p.marketCap}</p><p class="text-[10px] text-green-500">${p.velocityChange}</p></td>
+                    <td class="py-5"><div class="w-24 h-1.5 glass bg-white/5 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-cyanNeon to-purpleNeon" style="width: ${p.velocity}%"></div></div></td>
+                    <td class="py-5 text-right"><button class="p-2 hover:text-cyanNeon transition-colors"><i data-lucide="external-link" class="w-4 h-4 text-slate-600"></i></button></td>
                 </tr>
             `).join('');
-
-            // Re-init icons for new table content
             lucide.createIcons();
         };
 
-        // Filter Event
-        document.getElementById('dataFilter').addEventListener('change', (e) => {
-            updateUI(e.target.value);
-        });
-
-        // Chart Initialization
         const velocityCtx = document.getElementById('velocityChart').getContext('2d');
         const velocityGradient = velocityCtx.createLinearGradient(0, 0, 0, 320);
         velocityGradient.addColorStop(0, 'rgba(0, 242, 255, 0.15)');
@@ -491,92 +304,25 @@
 
         const velocityChart = new Chart(velocityCtx, {
             type: 'line',
-            data: {
-                labels: ['10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm'],
-                datasets: [{
-                    label: 'Velocity Index',
-                    data: storeData.all.velocity,
-                    borderColor: '#00F2FF',
-                    borderWidth: 4,
-                    pointRadius: 0,
-                    pointHoverRadius: 6,
-                    pointHoverBackgroundColor: '#00F2FF',
-                    pointHoverBorderColor: '#fff',
-                    pointHoverBorderWidth: 3,
-                    tension: 0.4,
-                    fill: true,
-                    backgroundColor: velocityGradient
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        backgroundColor: '#0A0C12',
-                        titleFont: { family: 'Outfit', size: 12 },
-                        bodyFont: { family: 'Inter', size: 12 },
-                        borderWidth: 1,
-                        borderColor: 'rgba(255,255,255,0.1)',
-                        padding: 12,
-                        displayColors: false
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: { display: false },
-                        ticks: { color: '#4B5563', font: { size: 10, weight: 'bold' } }
-                    },
-                    y: {
-                        grid: { color: 'rgba(255, 255, 255, 0.03)', drawBorder: false },
-                        ticks: { color: '#4B5563', font: { size: 10, weight: 'bold' } }
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                },
-            }
+            data: { labels: [], datasets: [{ label: 'Velocity', data: [], borderColor: '#00F2FF', fill: true, backgroundColor: velocityGradient, tension: 0.4, pointRadius: 0 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(255,255,255,0.03)' } } } }
         });
 
-        // Product Mix Doughnut
-        const mixCtx = document.getElementById('productMixChart').getContext('2d');
-        const productMixChart = new Chart(mixCtx, {
+        const productMixChart = new Chart(document.getElementById('productMixChart'), {
             type: 'doughnut',
-            data: {
-                labels: ['Pro', 'Elite', 'Venture'],
-                datasets: [{
-                    data: storeData.all.mix,
-                    backgroundColor: [
-                        '#00F2FF',
-                        '#BF5AF2',
-                        '#374151'
-                    ],
-                    borderWidth: 0,
-                    hoverOffset: 15
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '85%',
-                plugins: {
-                    legend: { display: false }
-                },
-                animation: {
-                    animateScale: true,
-                    animateRotate: true
-                }
-            }
+            data: { labels: [], datasets: [{ data: [], backgroundColor: ['#00F2FF', '#BF5AF2', '#374151', '#FFD60A'], borderWidth: 0 }] },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '85%', plugins: { legend: { display: false } } }
         });
 
-        // Init Lucide Icons
-        lucide.createIcons();
+        document.getElementById('dataFilter').addEventListener('change', (e) => updateUI(e.target.value));
 
-        // Initialize UI with 'all' segment
-        updateUI('all');
+        (async () => {
+            try {
+                const res = await fetch('data.json');
+                storeData = await res.json();
+                updateUI();
+            } catch (e) { console.error('Data fail', e); }
+        })();
     </script>
 </body>
 

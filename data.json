@@ -1,0 +1,78 @@
+{
+    "kpis": {
+        "grossRevenue": 1240580,
+        "activeSales": 12840,
+        "conversionRate": 4.28,
+        "growthIndex": 842.1
+    },
+    "velocityChart": {
+        "labels": [
+            "10am",
+            "11am",
+            "12pm",
+            "1pm",
+            "2pm",
+            "3pm",
+            "4pm",
+            "5pm"
+        ],
+        "data": [
+            42,
+            38,
+            55,
+            78,
+            92,
+            85,
+            96,
+            110
+        ]
+    },
+    "productMixChart": {
+        "labels": [
+            "Computing",
+            "Audio",
+            "Wearables",
+            "IoT"
+        ],
+        "data": [
+            45,
+            30,
+            15,
+            10
+        ]
+    },
+    "products": [
+        {
+            "identifier": "LX-9240-Z",
+            "name": "Neural Laptop Pro",
+            "category": "Computing",
+            "marketCap": "$12.4M",
+            "velocityChange": "+4.2%",
+            "velocity": 85
+        },
+        {
+            "identifier": "LX-1152-X",
+            "name": "Sonic Buds Max",
+            "category": "Audio",
+            "marketCap": "$4.8M",
+            "velocityChange": "+12.8%",
+            "velocity": 62
+        },
+        {
+            "identifier": "LX-8830-A",
+            "name": "Vision Glass S2",
+            "category": "Wearables",
+            "marketCap": "$2.1M",
+            "velocityChange": "+2.4%",
+            "velocity": 45
+        },
+        {
+            "identifier": "LX-4421-K",
+            "name": "Prime Cloud Hub",
+            "category": "IoT",
+            "marketCap": "$9.2M",
+            "velocityChange": "+8.1%",
+            "velocity": 78
+        }
+    ]
+}
